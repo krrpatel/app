@@ -12,8 +12,9 @@
         var num2 = $("#num2").val();
         var num3 = parseInt(num1) * 20 ;
         var ans = parseInt(num3) / 19 ;
-       alert(ans);
-        $("#answer").val(ans);
+        let num4 = Math.ceil(ans);
+        alert(num4);
+        $("#answer").val(num4);
       });
     });
   </script>

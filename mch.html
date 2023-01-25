@@ -1,0 +1,91 @@
+<html>
+
+<head>
+  <title>Number Of Powers</title>
+  <!-- include jquery file -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type='text/javascript'></script>
+
+<style>
+
+body {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  color: #303030;
+}
+
+h1 {
+  text-align: center;
+  display: inline-block;
+  color: #303030;
+}
+
+p {
+  text-align: center;
+}
+
+a.button {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 7px;
+}
+
+div {
+  text-align: center;
+}
+
+#answer {
+  font-size: 20px;
+  color: #303030;
+}
+
+#number, #number2 {
+  border-radius: 3px;
+  border: 1px solid #ecf0f1;
+  background: #ecf0f1;
+  color: #303030;
+  padding: 10px;
+}
+
+</style>
+  <script language="javascript">
+    function myFunction(event) {
+    var a = document.getElementById("number").value;
+    var b = document.getElementById("number2").value;
+    var c = 1.075;
+    var multiply = '';
+                        
+    for (i = 1; i < 2; i++) {
+            multiply += Math.pow(c, b);
+    }
+
+document.getElementById("answer").innerHTML = Math.ceil(multiply * a);
+    //document.getElementById("form1").onSubmit
+    return false;
+}
+</script>
+
+</head>
+
+<body>
+  <h1>Mch Broker</h1>
+  <div>
+    <input type="text" placeholder="enter a balance" id="number">
+  </div>
+  <p> ^ </p>
+  <div>
+    <input type="text" placeholder="enter a day" id="number2">
+  </div>
+  <p> = </p>
+  <p>
+    <div id="answer"></div>
+
+  </p>
+  <p><a class="button" href="javascript:void();" onclick="myFunction()">Submit</a>
+  </p>
+
+</body>
+
+</html>

@@ -91,9 +91,10 @@
 <script>
     let usdtQuantity = 0;
     let amountRequired = 0;
+    let sellPrice = 0;
 
     function calculateQuantity() {
-        const sellPrice = parseFloat(document.getElementById('sellPrice').value);
+        sellPrice = parseFloat(document.getElementById('sellPrice').value);
         const inputAmount = parseFloat(document.getElementById('inputAmount').value);
         const isInr = document.getElementById('isInr').checked;
 
@@ -109,6 +110,9 @@
             // Amount is in USDT
             usdtQuantity = inputAmount;
         }
+
+        // Display the USDT Quantity
+        document.getElementById('usdtQuantity').textContent = `USDT Quantity: ${usdtQuantity.toFixed(4)}`;
 
         // Show the section for entering the buying price
         document.getElementById('buyingPriceSection').style.display = 'block';
@@ -130,7 +134,6 @@
 
         // Display results
         document.getElementById('profit').textContent = `Profit: ₹${profit.toFixed(2)}`;
-        document.getElementById('usdtQuantity').textContent = `USDT Quantity: ${usdtQuantity.toFixed(4)}`;
         document.getElementById('amountRequired').textContent = `Amount Required to Buy USDT Quantity: ₹${amountRequired.toFixed(2)}`;
 
         // Show the output section

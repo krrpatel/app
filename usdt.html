@@ -48,6 +48,11 @@
             font-weight: bold;
             font-size: 18px;
         }
+        .usdt-quantity {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +88,7 @@
     
     <div class="output" id="output" style="display: none;">
         <p id="profit" class="profit"></p>
-        <p id="usdtQuantity"></p>
+        <p id="usdtQuantityDisplay" class="usdt-quantity"></p>
         <p id="amountRequired"></p>
     </div>
 </div>
@@ -111,8 +116,8 @@
             usdtQuantity = inputAmount;
         }
 
-        // Display the USDT Quantity
-        document.getElementById('usdtQuantity').textContent = `USDT Quantity: ${usdtQuantity.toFixed(4)}`;
+        // Display the USDT Quantity immediately after calculation
+        document.getElementById('usdtQuantityDisplay').textContent = `USDT Quantity: ${usdtQuantity.toFixed(4)}`;
 
         // Show the section for entering the buying price
         document.getElementById('buyingPriceSection').style.display = 'block';

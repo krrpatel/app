@@ -56,11 +56,6 @@
     <h2>USDT Profit Calculator</h2>
     
     <div class="input-group">
-        <label for="buyPrice">USDT Buying Price (INR)</label>
-        <input type="number" id="buyPrice" placeholder="Enter USDT buying price in INR">
-    </div>
-    
-    <div class="input-group">
         <label for="sellPrice">USDT Selling Price (INR)</label>
         <input type="number" id="sellPrice" placeholder="Enter USDT selling price in INR">
     </div>
@@ -76,9 +71,17 @@
         <label for="isInr">Check if amount is in INR</label>
     </div>
     
-    <button onclick="calculateProfit()">Calculate Profit</button>
+    <button onclick="calculateQuantity()">Calculate USDT Quantity</button>
     
-    <div class="output" id="output">
+    <div id="buyingPriceSection" style="display: none;">
+        <div class="input-group">
+            <label for="buyPrice">USDT Buying Price (INR)</label>
+            <input type="number" id="buyPrice" placeholder="Enter USDT buying price in INR">
+        </div>
+        <button onclick="calculateProfit()">Calculate Profit</button>
+    </div>
+    
+    <div class="output" id="output" style="display: none;">
         <p id="profit" class="profit"></p>
         <p id="usdtQuantity"></p>
         <p id="amountRequired"></p>
@@ -86,38 +89,52 @@
 </div>
 
 <script>
-    function calculateProfit() {
-        const buyPrice = parseFloat(document.getElementById('buyPrice').value);
+    let usdtQuantity = 0;
+    let amountRequired = 0;
+
+    function calculateQuantity() {
         const sellPrice = parseFloat(document.getElementById('sellPrice').value);
         const inputAmount = parseFloat(document.getElementById('inputAmount').value);
         const isInr = document.getElementById('isInr').checked;
 
-        if (isNaN(buyPrice) || isNaN(sellPrice) || isNaN(inputAmount) || buyPrice <= 0 || sellPrice <= 0 || inputAmount <= 0) {
+        if (isNaN(sellPrice) || isNaN(inputAmount) || sellPrice <= 0 || inputAmount <= 0) {
             alert('Please enter valid values for all fields.');
             return;
         }
 
-        let usdtQuantity;
-        let amountRequired;
-        let profit;
-
         if (isInr) {
             // Amount is in INR
-            usdtQuantity = inputAmount / buyPrice;
-            amountRequired = inputAmount;
+            usdtQuantity = inputAmount / sellPrice;
         } else {
             // Amount is in USDT
             usdtQuantity = inputAmount;
-            amountRequired = usdtQuantity * buyPrice;
         }
 
+        // Show the section for entering the buying price
+        document.getElementById('buyingPriceSection').style.display = 'block';
+    }
+
+    function calculateProfit() {
+        const buyPrice = parseFloat(document.getElementById('buyPrice').value);
+
+        if (isNaN(buyPrice) || buyPrice <= 0) {
+            alert('Please enter a valid buying price.');
+            return;
+        }
+
+        // Calculate the amount required to buy USDT quantity
+        amountRequired = usdtQuantity * buyPrice;
+
         // Calculate profit
-        profit = (sellPrice - buyPrice) * usdtQuantity;
+        const profit = (sellPrice - buyPrice) * usdtQuantity;
 
         // Display results
         document.getElementById('profit').textContent = `Profit: ₹${profit.toFixed(2)}`;
         document.getElementById('usdtQuantity').textContent = `USDT Quantity: ${usdtQuantity.toFixed(4)}`;
         document.getElementById('amountRequired').textContent = `Amount Required to Buy USDT Quantity: ₹${amountRequired.toFixed(2)}`;
+
+        // Show the output section
+        document.getElementById('output').style.display = 'block';
     }
 </script>
 
